@@ -1,0 +1,42 @@
+{
+  "as_of": "2026-06-06T14:00:00Z",
+  "estate": "Snowflake warehouse credit burn, query waste, idle time, ownership, and cost-anomaly lanes",
+  "lanes": [
+    {
+      "lane_id": "bi-executive-warehouse",
+      "warehouse": "BI_EXECUTIVE_WH",
+      "monthly_credits": 1820,
+      "baseline_credits": 1120,
+      "idle_percent": 22,
+      "failed_query_percent": 7,
+      "unlabeled_query_percent": 35,
+      "auto_suspend_gap_minutes": 18,
+      "owner": "Analytics engineering",
+      "next_action": "Reduce idle BI warehouse windows and attach owner labels before the next executive refresh cycle."
+    },
+    {
+      "lane_id": "elt-transform-warehouse",
+      "warehouse": "ELT_TRANSFORM_WH",
+      "monthly_credits": 2380,
+      "baseline_credits": 2050,
+      "idle_percent": 10,
+      "failed_query_percent": 3,
+      "unlabeled_query_percent": 14,
+      "auto_suspend_gap_minutes": 6,
+      "owner": "Data platform",
+      "next_action": "Tune transform windows and preserve dbt job labels so cost attribution stays board-readable."
+    },
+    {
+      "lane_id": "sandbox-exploration-warehouse",
+      "warehouse": "SANDBOX_EXPLORATION_WH",
+      "monthly_credits": 390,
+      "baseline_credits": 360,
+      "idle_percent": 5,
+      "failed_query_percent": 1,
+      "unlabeled_query_percent": 4,
+      "auto_suspend_gap_minutes": 2,
+      "owner": "Data science",
+      "next_action": "Keep sandbox controls attached to the monthly cost hygiene packet."
+    }
+  ]
+}

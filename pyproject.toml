@@ -1,0 +1,23 @@
+[project]
+name = "snowflake-credit-burn-variance-ledger"
+version = "0.1.0"
+description = "Snowflake credit-burn variance ledger for warehouse spend drift, query waste, idle warehouses, and owner accountability."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "AGPL-3.0-only"
+authors = [{ name = "Kinetic Gain" }]
+keywords = ["snowflake", "finops", "data-engineering", "sql", "credit-burn", "executive-intelligence"]
+
+[project.scripts]
+snowflake-credit-burn-variance-ledger = "snowflake_credit_burn_variance_ledger.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["snowflake_credit_burn_variance_ledger*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
