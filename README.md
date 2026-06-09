@@ -12,6 +12,16 @@ Snowflake credit-burn variance ledger for warehouse spend drift, query waste, id
 ![Overview proof](screenshots/01-overview-proof.png)
 ![Ledger proof](screenshots/02-ledger-proof.png)
 
+## What this product does
+
+This product gives finance, RevOps, data engineering, and platform leaders a shared Snowflake cost-governance ledger. Instead of treating warehouse spend drift, query waste, idle time, unlabeled work, and auto-suspend gaps as disconnected admin findings, it turns them into one board-readable view of avoidable credit burn and ownership.
+
+The SaaS go-to-market analyst view is that Snowflake spend is a growth efficiency signal. Data-platform waste can distort campaign analytics, margin narratives, pricing discipline, and investor confidence if leadership sees only high-level cloud spend. The ledger shows where usage is outpacing accountable value.
+
+The SaaS value architect view is focused on the path to savings. It ranks warehouse lanes by burn variance, excess credits, owner, and next remediation action so teams can decide whether to fix labeling, query hygiene, warehouse sizing, idle policies, or auto-suspend posture first.
+
+Technically, the repo demonstrates Snowflake governance proof without production credentials or warehouse data. It includes a Python scoring engine, CLI, synthetic Snowflake warehouse fixture, SQL extraction contract, unit tests, prerendered static surface, screenshot proof, and smoke checks. The shared Kinetic Gain pattern is to convert platform evidence into decision-ready business proof while keeping the technical contract inspectable.
+
 ## Why this exists
 
 Snowflake cost governance is not just cheaper warehouses. It is spend variance, failed queries, unlabeled work, idle time, and missing ownership becoming visible before the finance narrative turns into generic cloud-spend noise.

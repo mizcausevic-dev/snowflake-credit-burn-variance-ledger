@@ -21,6 +21,28 @@ def render_site(data: BurnInput) -> str:
         """
         for item in summary.findings
     )
+    depth_cards = """
+        <article class="depth-card story">
+          <p class="eyebrow">SaaS go-to-market analyst lens</p>
+          <h3>Turns Snowflake spend drift into a board-readable growth efficiency story.</h3>
+          <p>Credit burn variance matters because data-platform cost can quietly distort margin, campaign analytics, product instrumentation, and investor narratives. This surface explains where warehouse usage is outpacing accountable value before the CFO conversation becomes generic cloud-spend noise.</p>
+        </article>
+        <article class="depth-card">
+          <p class="eyebrow">SaaS value architect lens</p>
+          <h3>Connects wasted credits to ownership, hygiene, and remediation sequence.</h3>
+          <p>The ledger highlights which warehouses have excess credits, idle time, unlabeled work, query waste, or auto-suspend gaps. It gives finance, RevOps, data engineering, and platform owners one shared view of what to clean up first.</p>
+        </article>
+        <article class="depth-card">
+          <p class="eyebrow">Technical proof</p>
+          <h3>The repo keeps Snowflake governance evidence inspectable.</h3>
+          <p>It includes a Python scoring engine, CLI, synthetic Snowflake warehouse fixture, SQL extraction contract, unit tests, prerendered static surface, screenshot proof, and smoke checks. No production warehouse credentials or usage data are required.</p>
+        </article>
+        <article class="depth-card">
+          <p class="eyebrow">What these repos have in common</p>
+          <h3>They turn platform waste into decision-ready operating proof.</h3>
+          <p>The shared Kinetic Gain pattern is to normalize evidence, score exposed lanes, attach ownership, state the next action, and publish the result as a surface that non-technical leaders can read while technical reviewers can trace the logic.</p>
+        </article>
+    """
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -33,17 +55,25 @@ def render_site(data: BurnInput) -> str:
     * {{ box-sizing: border-box; }}
     body {{ margin: 0; font-family: "Segoe UI", sans-serif; background: radial-gradient(circle at 82% 0%, #142032, var(--bg) 42%); color: var(--text); }}
     main {{ width: min(1160px, calc(100vw - 40px)); margin: 0 auto; padding: 56px 0 70px; }}
-    .hero, .lane, .brief {{ border: 1px solid var(--line); background: rgba(13,23,39,.92); border-radius: 28px; box-shadow: 0 24px 80px rgba(0,0,0,.28); }}
+    .hero, .lane, .brief, .depth {{ border: 1px solid var(--line); background: rgba(13,23,39,.92); border-radius: 28px; box-shadow: 0 24px 80px rgba(0,0,0,.28); }}
     .hero {{ padding: 56px; border-color: rgba(37,215,239,.42); }}
     .eyebrow {{ color: var(--green); font: 700 12px/1.2 Consolas, monospace; letter-spacing: .16em; text-transform: uppercase; }}
     h1 {{ max-width: 900px; margin: 20px 0; font: 800 clamp(44px, 7vw, 86px)/.95 Georgia, serif; letter-spacing: -.05em; }}
     h2 {{ margin: 48px 0 20px; font: 800 clamp(34px, 4vw, 54px)/1 Georgia, serif; }}
     h3 {{ margin: 0 0 20px; font-size: 24px; line-height: 1.05; }}
     p {{ color: var(--muted); font-size: 18px; line-height: 1.65; }}
-    .metrics, .lanes {{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 34px; }}
+    .metrics, .lanes, .depth-grid {{ display: grid; gap: 18px; margin-top: 34px; }}
+    .metrics, .lanes {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
+    .depth {{ margin-top: 28px; padding: 30px; }}
+    .depth-grid {{ grid-template-columns: repeat(4, minmax(0, 1fr)); }}
+    .section-head {{ display: flex; align-items: end; justify-content: space-between; gap: 18px; border-bottom: 1px solid rgba(255,255,255,.08); padding-bottom: 16px; }}
+    .section-head h2 {{ margin: 0; }}
+    .section-note {{ color: var(--muted); font: 700 12px/1.2 Consolas, monospace; letter-spacing: .16em; text-transform: uppercase; }}
     .metric {{ padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: #101b2f; }}
     .metric strong {{ display: block; font-size: 44px; margin-top: 8px; }}
-    .lane {{ padding: 28px; }}
+    .lane, .depth-card {{ padding: 28px; }}
+    .depth-card {{ min-height: 320px; border: 1px solid rgba(255,255,255,.08); border-radius: 22px; background: rgba(8,16,29,.78); }}
+    .depth-card.story {{ border-left: 4px solid var(--cyan); }}
     .lane.escalate {{ border-color: var(--pink); }}
     .lane.watch {{ border-color: var(--violet); }}
     .lane.contained {{ border-color: var(--green); }}
@@ -52,7 +82,8 @@ def render_site(data: BurnInput) -> str:
     dd {{ margin: 4px 0 0; font-size: 22px; font-weight: 800; }}
     code {{ color: var(--cyan); }}
     .brief {{ margin-top: 28px; padding: 30px; }}
-    @media (max-width: 780px) {{ .hero {{ padding: 32px; }} .metrics, .lanes {{ grid-template-columns: 1fr; }} }}
+    @media (max-width: 1100px) {{ .depth-grid {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }} }}
+    @media (max-width: 780px) {{ .hero {{ padding: 32px; }} .metrics, .lanes, .depth-grid {{ grid-template-columns: 1fr; }} .section-head {{ align-items: flex-start; flex-direction: column; }} }}
   </style>
 </head>
 <body>
@@ -66,6 +97,13 @@ def render_site(data: BurnInput) -> str:
         <div class="metric"><span>Escalation lanes</span><strong>{summary.escalation_lanes}</strong></div>
         <div class="metric"><span>Excess credits</span><strong>{summary.excess_credit_estimate}</strong></div>
       </div>
+    </section>
+    <section class="depth">
+      <div class="section-head">
+        <h2>What this product does</h2>
+        <div class="section-note">FinOps / warehouse hygiene / margin protection</div>
+      </div>
+      <div class="depth-grid">{depth_cards}</div>
     </section>
     <h2>Credit-burn ledger</h2>
     <section class="lanes">{cards}</section>
